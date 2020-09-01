@@ -1,6 +1,6 @@
 // @TODO: YOUR CODE HERE!
-// function makeResponsive() {
-var svgWidth = 960;
+
+var svgWidth = 850;
 var svgHeight = 500
 
 var margin = {
@@ -205,7 +205,7 @@ d3.csv("assets/data/data.csv").then(function (data) {
     .text("age");
 
   // updateToolTip function above csv import
-  var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
+  // var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
   // x axis labels event listener
   labelsGroup.selectAll("text")
     .on("click", function () {

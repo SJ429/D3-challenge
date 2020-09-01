@@ -1,5 +1,5 @@
 // @TODO: YOUR CODE HERE!
-var svgWidth = 960;
+var svgWidth = 900;
 var svgHeight = 500
 
 var margin = {
@@ -78,29 +78,34 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYA
 
 // function used for updating circles group with new tooltip
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
-  var xlabel;
+  var xlabel
   var ylabel;
+
   // Conditional for X axis
-    if (chosenXAxis === "poverty") {
-      xlabel = "Poverty:";
-    }
-    else {
-      xlabel = "Healthcare:";
-    }
-  // Conditional for Y axis
-    if (chosenYAxis === "income") {
-      ylabel = "Income:";
-    }
-    else {
-      ylabel = "Age"
-    }
+      if (chosenXAxis === "poverty") {
+        xlabel = "Poverty";
+      }
+      else {
+        xlabel = "Healthcare";
+      }
+    // Conditional for Y axis
+      if (chosenYAxis === "income") {
+        ylabel = "Income:";
+      }
+      else {
+        ylabel = "Age"
+      }
     var toolTip = d3.tip()
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function (d) {
-      return (`${d.state}<br>${d[chosenXAxis]}%<br>${d[chosenYAxis]}`);
-    });
-
+        if (chosenXAxis==="poverty") {
+        return (`${d.state}<hr>${xlabel}<br>${d[chosenXAxis]}%<br>${ylabel}${d[chosenYAxis]}`);
+        } 
+        else {
+        return (`${d.state}<hr>${xlabel}<br>${d[chosenXAxis]}%<br>${ylabel}${d[chosenYAxis]}`);;
+        }
+      })
  // Create mouseover event listener to disply tool tip
     circlesGroup.call(toolTip);
     circlesGroup.on("mouseover", function (data) {
@@ -121,6 +126,7 @@ d3.csv("assets/data/data.csv").then(function (dataCvs) {
     data.healthcare = +data.healthcare;
     data.age = +data.age;
     data.income = +data.income
+    console.log(data)
   });
   // Create x scale function
   // xLinearScale function above csv import
@@ -157,7 +163,7 @@ d3.csv("assets/data/data.csv").then(function (dataCvs) {
     .attr("opacity", ".5");
 
    // Add State abbr. text to circles.
-  var circletextGroup = chartGroup.selectAll()
+  var circlestextGroup = chartGroup.selectAll()
       .data(dataCvs)
       .enter()
       .append("text")
@@ -184,13 +190,13 @@ d3.csv("assets/data/data.csv").then(function (dataCvs) {
     .attr("y", 40)
     .attr("value", "healthcare") // value to grab for event listener
     .classed("inactive", true)
-    .text("Healthcare");
+    .text("Healthcare (%)");
 
  // Create group for two y-axis labels
-  var labelsGroup = chartGroup.append("g")
+  var ylabelsGroup = chartGroup.append("g")
 
   // append y axis
-  var incomeLabel = labelsGroup.append("text")
+  var incomeLabel = ylabelsGroup.append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left)
     .attr("x", 0 - (height / 2))
@@ -198,7 +204,7 @@ d3.csv("assets/data/data.csv").then(function (dataCvs) {
     .classed("active", true)
     .text("Income");
 
-  var ageLabel = labelsGroup.append("text")
+  var ageLabel = ylabelsGroup.append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 20 - margin.left)
     .attr("x", 0 - (height / 2))
@@ -213,7 +219,7 @@ d3.csv("assets/data/data.csv").then(function (dataCvs) {
     .on("click", function () {
       // get value of selection
       var value = d3.select(this).attr("value");
-        if (value === "poverty" || value === "healthcare") {
+        if (true) {if (value ==="poverty" || value ==="healthcare") {
         // replaces chosenXAxis with value
         chosenXAxis = value;
         //console.log(chosenXAxis)
@@ -223,61 +229,62 @@ d3.csv("assets/data/data.csv").then(function (dataCvs) {
         // updates x axis with transition
         x_dynaAxis = renderAxes(xLinearScale, x_dynaAxis);
         // updates circles with new x values
-        // circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
+        circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
         // updates tooltips with new info
         circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
         // changes classes to change bold text
-          if (chosenXAxis === "poverty") {
-          povertyLabel
-            .classed("active", true)
-            .classed("inactive", false);
+            if (chosenXAxis ==="poverty") {
+               povertyLabel
+                .classed("active", true)
+                .classed("inactive", false);
 
-          healthcareLabel
-            .classed("active", false)
-            .classed("inactive", true);
-        }
-        else {
-          healthcareLabel
-            .classed("active", false)
-            .classed("inactive", true);
+               healthcareLabel
+                .classed("active", false)
+                .classed("inactive", true);
+          }
+            else {
+                healthcareLabel
+                  .classed("active", false)
+                  .classed("inactive", true);
 
-          povertyLabel
-            .classed("active", true)
-            .classed("inactive", false);
-        }
+                povertyLabel
+                  .classed("active", true)
+                  .classed("inactive", false);
+          }
        }
-        else {
-          chosenYAxis = value;
+            else {
+              chosenYAxis = value;
 
           // Update y scale for new data.
-          yLinearScale = yScale(dataCvs, chosenYAxis);
+              yLinearScale = yScale(dataCvs, chosenYAxis);
 
           // Updates y axis with transition.
-          y_dynaAxis = renderYAxes(yLinearScale, y_dynaAxis);
+              y_dynaAxis = renderYAxes(yLinearScale, y_dynaAxis);
 
-          if (chosenYAxis === "income") {
-            incomeLabel
-              .classed("active", true)
-              .classed("inactive", false);
-  
-            ageLabel
-              .classed("active", false)
-              .classed("inactive", true);
-          }
-          else {
-            ageLabel
-              .classed("active", false)
-              .classed("inactive", true);
-  
-            incomeLabel
-              .classed("active", true)
-              .classed("inactive", false);
-          }
-
-        }
+              if (chosenYAxis === "income") {
+                  incomeLabel
+                    .classed("active", true)
+                    .classed("inactive", false);
+        
+                  ageLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+            }
+              else {
+                  ageLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
       
-    });
+                  incomeLabel
+                    .classed("active", true)
+                    .classed("inactive", false);
+            }
+
+          }
+        
     
+        } 
+});
 
 }).catch(function (error) {
    console.log(error);
