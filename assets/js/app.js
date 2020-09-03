@@ -173,12 +173,15 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
     .data(dataCsv)
     .enter()
     .append("text")
-    .text(d => (d.abbr))
+    .text(d =>(d.abbr))
     .attr("x", d => xLinearScale(d[chosenXAxis]))
     .attr("y", d => yLinearScale(d[chosenYAxis]))
-    .style("font-size", "8px")
+    .attr("class", "axisText")
+    .style("font-size", "10px")
+    .style("font-weight", "bold")
     .style("text-anchor", "middle")
-    .style('fill', 'white');
+    .style("fill", "white");
+    
 
   // Create group for two x-axis labels
   var xlabelsGroup = chartGroup.append("g")
@@ -218,7 +221,7 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
     .attr("value", "age") // value to grab for event listener
     .attr("dy", "1em")
     .classed("inactive", true)
-    .text("Age");
+    .text("Age (%)");
 
   // updateToolTip function above csv import
   var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);

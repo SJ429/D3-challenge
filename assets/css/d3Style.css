@@ -23,6 +23,11 @@
   cursor: pointer;
 }
 
+.title {text-justify: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
 /* font size dependent on radius, see app.js */
 .stateText {
   font-family: sans-serif;
