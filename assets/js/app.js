@@ -241,9 +241,6 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
         tcirclesGroup = rendertCircles(tcirclesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis)
 
-        // Updates tooltips with new info
-        circlesGroup = updateToolTip(circlesGroup, chosenXAxis, chosenYAxis);
-
         // Changes data item to bold text
         if (chosenXAxis === "poverty") {
           povertyLabel
@@ -270,7 +267,7 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
   ylabelsGroup.selectAll("text")
     .on("click", function () {
       // get value of selection
-      console.log(chosenYAxis)
+      // console.log(chosenYAxis)
       var value = d3.select(this).attr("value");
       if (value !== chosenYAxis) {
          // replaces chosenYAxis with value
@@ -283,9 +280,6 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
         y_dynaAxis = renderYAxes(yLinearScale, y_dynaAxis);
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
         tcirclesGroup = rendertCircles(tcirclesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
-
-        // Updates tooltips with new info
-        circlesGroup = updateToolTip(circlesGroup, chosenXAxis, chosenYAxis);
 
         // Changes data item to bold text
         if (chosenYAxis === "income") {
