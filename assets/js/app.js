@@ -14,7 +14,6 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 // Create SVG wrapper and append a SVG group that will hold the chart,
-
 var svg = d3
   .select("#scatter")
   .append("svg")
@@ -39,6 +38,7 @@ function xScale(dataCsv, chosenXAxis) {
     .range([0, width]);
   return xLinearScale;
 }
+
 //Function to update y scale
 function yScale(dataCsv, chosenYAxis) {
   var yLinearScale = d3.scaleLinear()
@@ -54,7 +54,6 @@ function renderAxes(newXScale, x_dynaAxis) {
   x_dynaAxis.transition()
     .duration(1000)
     .call(bottomAxis);
-
   return x_dynaAxis;
 }
 
@@ -66,8 +65,8 @@ function renderYAxes(newYScale, y_dynaAxis) {
     .call(leftAxis);
   return y_dynaAxis;
 }
-// Function to render circles group with transition to x and y axis
-// new circles
+
+// Functions to render circles and text group with transition to x and y axis
 function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
   circlesGroup.transition()
     .duration(1000)
@@ -82,8 +81,8 @@ function rendertCircles(tcirclesGroup, newXScale, chosenXAxis, newYScale, chosen
     .attr("y", d => newYScale(d[chosenYAxis]));
   return tcirclesGroup;
 }
-// Function to update circles group with new tooltip
 
+// Function to update circles group with new tooltip
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
   var xlabel
   var ylabel;
@@ -103,23 +102,28 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
   else {
     ylabel = "Age"
   }
+
+  //Function for toptip tool
   var toolTip = d3.tip()
     .attr("class", "tooltip")
     .offset([80, -60])
     .html(function (d) {
       return (`${d.state}<hr>${xlabel}<br>${d[chosenXAxis]}%<br>${ylabel}${d[chosenYAxis]}`);
     })
+
   // Create mouseover event listener to display tool tip
   circlesGroup.call(toolTip);
-  circlesGroup.on("mouseover", function (data) {
+    circlesGroup.on("mouseover", function (data) {
     toolTip.show(data);
   })
+
     // Create onmouseout event
     .on("mouseout", function (data) {
       toolTip.hide(data);
     });
   return circlesGroup;
 }
+
 // Retrieve data from the CSV file and execute everything below
 d3.csv("assets/data/data.csv").then(function (dataCsv) {
   // parse data
@@ -130,6 +134,7 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
     data.income = +data.income
     console.log(data)
   });
+
   // Create LinearScale scale functions
   // xLinearScale function above csv import
   var xLinearScale = xScale(dataCsv, chosenXAxis);
@@ -201,7 +206,7 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left)
     .attr("x", 0 - (height / 2))
-    .attr("value", "income")
+    .attr("value", "income") // value to grab for event listener
     .attr("dy", "1em")
     .classed("active", true)
     .text("Income");
@@ -210,34 +215,36 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
     .attr("transform", "rotate(-90)")
     .attr("y", 20 - margin.left)
     .attr("x", 0 - (height / 2))
-    .attr("value", "age")
+    .attr("value", "age") // value to grab for event listener
     .attr("dy", "1em")
     .classed("inactive", true)
     .text("Age");
 
   // updateToolTip function above csv import
   var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
+
   // x axis labels event listener
   xlabelsGroup.selectAll("text")
     .on("click", function () {
       // get value of selection
       var value = d3.select(this).attr("value");
       if (value !== chosenXAxis) {
-        // replaces chosenXAxis with value
+        // Replaces chosenXAxis with value
         chosenXAxis = value;
         //console.log(chosenXAxis)
-        // functions here found above csv import
-        // updates x scale for new data
+       
+        // Updates x scale for new data
         xLinearScale = xScale(dataCsv, chosenXAxis);
-        // updates x axis with transition
-        x_dynaAxis = renderAxes(xLinearScale, x_dynaAxis);
-        // updates circles with new x values
-        circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
+        // Updates x axis with transition circles and text new x values
+        x_dynaAxis = renderAxes(xLinearScale, x_dynaAxis);
+        circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
         tcirclesGroup = rendertCircles(tcirclesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis)
-        // updates tooltips with new info
+
+        // Updates tooltips with new info
         circlesGroup = updateToolTip(circlesGroup, chosenXAxis, chosenYAxis);
-        // changes classes to change bold text
+
+        // Changes data item to bold text
         if (chosenXAxis === "poverty") {
           povertyLabel
             .classed("active", true)
@@ -266,20 +273,21 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
       console.log(chosenYAxis)
       var value = d3.select(this).attr("value");
       if (value !== chosenYAxis) {
+         // replaces chosenYAxis with value
         chosenYAxis = value;
 
-        // Update y scale for new data.
+        // Updates y scale for new data.
         yLinearScale = yScale(dataCsv, chosenYAxis);
 
-        // Updates y axis with transition.
+        // Updates y axis with transition circles and text new y values.
         y_dynaAxis = renderYAxes(yLinearScale, y_dynaAxis);
-
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
-        // updates tooltips with new info
-        tcirclesGroup = rendertCircles(tcirclesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis)
+        tcirclesGroup = rendertCircles(tcirclesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
+        // Updates tooltips with new info
         circlesGroup = updateToolTip(circlesGroup, chosenXAxis, chosenYAxis);
-        // changes classes to change bold text
+
+        // Changes data item to bold text
         if (chosenYAxis === "income") {
           incomeLabel
             .classed("active", true)
@@ -298,11 +306,7 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
             .classed("active", false)
             .classed("inactive", true);
         }
-
-
       }
-
-
     });
 
 }).catch(function (error) {
