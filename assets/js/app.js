@@ -1,4 +1,4 @@
-// @TODO: YOUR CODE HERE!
+//// @TODO: YOUR CODE HERE!
 //Set parameters for SVG
 var svgWidth = 800;
 var svgHeight = 400
@@ -158,25 +158,22 @@ d3.csv("assets/data/data.csv").then(function (dataCsv) {
     .call(leftAxis);
 
   // append initial circles
-  var circlesGroup = chartGroup.selectAll("circle")
+  var circles = chartGroup.selectAll("circle")
     .data(dataCsv)
     .enter()
-    .append("circle")
+
+  var circlesGroup = circles.append("circle")
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
-    .attr("r", 15)
+    .attr("r", "15")
     .attr("fill", "teal")
     .attr("opacity", ".5");
 
   // Add State abbr. text to circles.
-  var tcirclesGroup = chartGroup.selectAll("text")
-    .data(dataCsv)
-    .enter()
-    .append("text")
+  var tcirclesGroup = circles.append("text")
     .text(d =>(d.abbr))
     .attr("x", d => xLinearScale(d[chosenXAxis]))
     .attr("y", d => yLinearScale(d[chosenYAxis]))
-    .attr("class", "axisText")
     .style("font-size", "10px")
     .style("font-weight", "bold")
     .style("text-anchor", "middle")
