@@ -9,7 +9,7 @@
   
   The data include poverty, income, age and healthcare of all fifty states.
   
-  ![GitHub Logo](/images/logo.png)
+  ![Capture Dark Map final.PNG](/images/logo.png)
 Format: ![Alt Text](url)
   
   
