@@ -9,7 +9,7 @@
   
   The data include poverty, income, age and healthcare of all fifty states.
   
-  ![Capture Dark Map final.PNG](/images/logo.png)
+  ![https://github.com/SJ429/leaflet-challenge/blob/master/Leaflet-Step-1/Images/Capture%20Dark%20Map%20final.PNG](/images/logo.png)
 Format: ![Alt Text](url)
   
   
