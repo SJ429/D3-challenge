@@ -9,6 +9,10 @@
   
   The data include poverty, income, age and healthcare of all fifty states.
   
+  ![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
+  
+  
   The data set included with the assignment was based on 2014 ACS 1-year estimates: https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml
   https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml  
 
