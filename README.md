@@ -8,10 +8,7 @@
   The completed project is located at https://sj429.github.io/D3-challenge/
   
   The data include poverty, income, age and healthcare of all fifty states.
-  
-  ![https://github.com/SJ429/leaflet-challenge/blob/master/Leaflet-Step-1/Images/Capture%20Dark%20Map%20final.PNG](/images/logo.png)
-Format: ![Alt Text](url)
-  
+![Image of Capture_1.PNG](https://Capture.github.com/images/Capture_1.png)
   
   The data set included with the assignment was based on 2014 ACS 1-year estimates: https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml
   https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml  
