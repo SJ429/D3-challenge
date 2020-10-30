@@ -1,8 +1,6 @@
-# D3-Challenge
-  
-  ## Data Journalism and D3
+# D3 Times: 
 
-  D3Times: Discovered Between Health Risks and Age, Income
+## Using D3 to Display Health Risks, Age and Income
 
   The purpose of this project was to use the D3 library of JavaScript to create scatter plots with data variables. 
   The completed project is located at https://sj429.github.io/D3-challenge/
