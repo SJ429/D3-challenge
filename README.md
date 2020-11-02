@@ -3,7 +3,7 @@
 ## Using D3 to Display Health Risks, Age and Income
 
   The purpose of this project was to use the D3 library of JavaScript to create scatter plots with data variables. 
-  The completed project is located at https://sj429.github.io/D3-challenge/
+  The completed project is located at https://sj429.github.io/HealthRiskWithD3/
   
   The data include poverty, income, age and healthcare of all fifty states.
 
