@@ -1,14 +1,16 @@
-# D3-challenge
-# D3 Homework - Data Journalism and D3
+# What Factors Impact Health
 
-## Background
 
-D3Times:
-Discovered Between Health Risks and Age, Income
 
-The purpose of this project is to use the D3 library of JavaScript to create scatter plots with data variables. The data include poverty, income, age and healthcare of all fifty states.
+  The purpose of this assignment was to use the D3 library of JavaScript to visualize the health risk each U.S. state faced.  Thus an interactive scatter plot chart was created. 
+  
 
-The data set included with the assignment is based on 2014 ACS 1-year estimates: https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml
-https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml  
+  ![](Images/Capture.PNG)
+  
+  The interactive plot is located at https://sj429.github.io/HealthRiskWithD3/
+  
+  
+  The data set used for the assignment was based on 2014 ACS 1-year estimates: https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml
+    
 
 
