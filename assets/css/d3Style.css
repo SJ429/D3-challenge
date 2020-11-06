@@ -57,6 +57,44 @@
   border-radius: 4px;
 }
 
+.tooltip {
+  position: absolute;
+  width: 135px;
+  height: 100px;
+  padding: 2px;
+  padding-top: 8px;
+  font: 12px sans-serif;
+  color: white;
+  text-align: center;
+  background: #09040f;
+  border: 0;
+  border-radius: 10px;
+}
+
+
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+.d3-tip.n:after {
+  margin: -2px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+.axis-text {
+  font-family: sans-serif;
+  font-weight: bold;
+  fill: hsl(182, 93%, 50%);
+  text-anchor: middle;
+}
 /* Mobile Rules */
 @media screen and (max-width: 530px) {
   .stateText {
