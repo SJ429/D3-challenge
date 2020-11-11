@@ -7,6 +7,7 @@
 
   ![](Images/Capture.PNG)
   
+  
   The interactive plot is located at https://sj429.github.io/HealthRiskWithD3/
   
   
