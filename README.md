@@ -13,5 +13,9 @@
   
   The data set used for the assignment was based on 2014 ACS 1-year estimates: https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml
     
+    
+  ## Other Languages and Technologies
+  
+  HTML, SVG, and CSS.
 
 
