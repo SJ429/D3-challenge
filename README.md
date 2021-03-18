@@ -2,7 +2,7 @@
 
 
 
-  The purpose of this assignment was to use the D3 library of JavaScript to visualize the health risk each U.S. state faced.  Thus an interactive scatter plot chart was created. 
+  The purpose of the assignment was to use the D3 library of JavaScript to visualize the health risk each U.S. state faced.  Thus an interactive scatter plot chart was created. 
   
 
   ![](Images/Capture.PNG)
